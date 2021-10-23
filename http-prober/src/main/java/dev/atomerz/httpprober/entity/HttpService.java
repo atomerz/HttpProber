@@ -1,5 +1,7 @@
 package dev.atomerz.httpprober.entity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -90,6 +92,15 @@ public class HttpService {
         Objects.equals(url, that.url) &&
         Objects.equals(creationDate, that.creationDate) &&
         status == that.status;
+  }
+
+  @Override
+  public String toString() {
+    try {
+      return new ObjectMapper().writeValueAsString(this);
+    } catch (JsonProcessingException e) {
+      throw new AssertionError(e);
+    }
   }
 
   @Override

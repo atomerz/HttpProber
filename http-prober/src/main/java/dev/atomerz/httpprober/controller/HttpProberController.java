@@ -42,7 +42,7 @@ public class HttpProberController {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   public HttpService create(@RequestBody HttpService service) {
-    return repository.save(service);
+    return repository.saveAndFlush(service);
   }
 
   @PutMapping(
@@ -50,7 +50,7 @@ public class HttpProberController {
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   public HttpService update(@RequestBody HttpService service) {
-    return repository.save(service);
+    return repository.saveAndFlush(service);
   }
 
   @DeleteMapping(
@@ -59,6 +59,7 @@ public class HttpProberController {
   )
   public void delete(@PathVariable long id) {
     repository.deleteById(id);
+    repository.flush();
   }
 
 }
